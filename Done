@@ -1,0 +1,40 @@
+URDF:
+1) Добавлены keyframe - маркеры. 
+2) Добавлены feet_edge - 4 маркера на стопы
+
+k1_config_ground.py:
+3) Обновлен конфиг для K1
+4) высота головы и торса считается автоматически с помощью файла HoST/legged_gym/resources/robots/k1/check_k1_height.py
+
+HoST/rsl_rl/rsl_rl/algorithms/ppo.py:
+5) Добавлен клиппинг и nan_to_num value_loss
+6) аналогично для функции update_distribution в actor-critic чтобы не было вылетов
+
+HoST/legged_gym/legged_gym/scripts/train.py:
+7) добавлено логирование конфига
+
+HoST/legged_gym/legged_gym/envs/base/host_ground.py:
+8) в compute_observations: current_obs = torch.nan_to_num()
+9) добавлен клиппинг в; _reward_dof_acc; _reward_joint_power; _reward_dof_vel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+про фазы:
+Фаза 1  - группировка. Поднять корпус подтянуть под себя ноги опереться конечностями
+Фаза 2 -  переход в присед. перенести центр тяжести на ступни, оторвать другие части тела от пола.(ловит равновесие)
+Фаза 3 - выпрямление. идет максималная награда за высоту. поднимает корпус
+

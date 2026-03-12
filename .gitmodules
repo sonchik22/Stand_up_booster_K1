@@ -1,0 +1,3 @@
+[submodule "HoST"]
+	path = HoST
+	url = https://github.com/InternRobotics/HoST.git
