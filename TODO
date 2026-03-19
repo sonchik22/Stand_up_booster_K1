@@ -1,0 +1,29 @@
+Sim2Sim:
+
+#Конвертировать политику в ONNX
+
+#Добавить MuJoCo XML для G1 в mimic_k1_data
+
+Написать host_agent_node.cpp с правильным obs space + history buffer
+
+Создать host.sim.launch.py
+
+colcon build и запустить: ros2 launch robot_launcher host.sim.launch.py
+
+Протестировать вставание, убедиться что нет осцилляций
+
+
+
+Sim2Real (после успешного сим2сим):
+
+Скопировать workspace на робота: ./scripts/deploy.sh <robot_ip>
+
+Создать host.real.launch.py (по аналогии с booster_rl.real.launch.py)
+
+Положить робота на пол лицом вверх, подключиться по SSH
+
+Запустить интерполяцию в default position: ./interpolate_to_default.sh
+
+Только после того, как робот плавно принял дефолтную позу — запустить RL: ./start_rl.sh
+
+При опасных скоростях (max_qvel_threshold превышен) контроллер автоматически переключится в damping mode
